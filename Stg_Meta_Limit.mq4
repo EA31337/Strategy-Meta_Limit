@@ -6,8 +6,8 @@
 
 /**
  * @file
- * Implements Conditions meta strategy.
+ * Implements Limit meta strategy.
  */
 
 // Includes the main code.
-#include "Stg_Meta_Conditions.mq5"
+#include "Stg_Meta_Limit.mq5"
