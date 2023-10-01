@@ -1,89 +1,87 @@
 /**
  * @file
- * Implements Conditions meta strategy.
+ * Implements Limit meta strategy.
  */
 
 // Prevents processing this includes file multiple times.
-#ifndef STG_META_CONDITIONS_MQH
-#define STG_META_CONDITIONS_MQH
+#ifndef STG_META_LIMIT_MQH
+#define STG_META_LIMIT_MQH
 
 // Trade conditions.
-enum ENUM_STG_CONDITIONS_CONDITION {
-  STG_CONDITIONS_COND_0_NONE = 0,                      // None
-  STG_CONDITIONS_COND_IS_PEAK = TRADE_COND_IS_PEAK,    // Market is at peak level
-  STG_CONDITIONS_COND_IS_PIVOT = TRADE_COND_IS_PIVOT,  // Market is in pivot levels
-  // STG_CONDITIONS_COND_ORDERS_PROFIT_GT_01PC = TRADE_COND_ORDERS_PROFIT_GT_01PC,  // Equity > 1%
-  // STG_CONDITIONS_COND_ORDERS_PROFIT_LT_01PC = TRADE_COND_ORDERS_PROFIT_LT_01PC,  // Equity < 1%
-  // STG_CONDITIONS_COND_ORDERS_PROFIT_GT_02PC = TRADE_COND_ORDERS_PROFIT_GT_02PC,  // Equity > 2%
-  // STG_CONDITIONS_COND_ORDERS_PROFIT_LT_02PC = TRADE_COND_ORDERS_PROFIT_LT_02PC,  // Equity < 2%
-  // STG_CONDITIONS_COND_ORDERS_PROFIT_GT_05PC = TRADE_COND_ORDERS_PROFIT_GT_05PC,  // Equity > 5%
-  // STG_CONDITIONS_COND_ORDERS_PROFIT_LT_05PC = TRADE_COND_ORDERS_PROFIT_LT_05PC,  // Equity < 5%
-  // STG_CONDITIONS_COND_ORDERS_PROFIT_GT_10PC = TRADE_COND_ORDERS_PROFIT_GT_10PC,  // Equity > 10%
-  // STG_CONDITIONS_COND_ORDERS_PROFIT_LT_10PC = TRADE_COND_ORDERS_PROFIT_LT_10PC,  // Equity < 10%
+enum ENUM_STG_LIMIT_CONDITION {
+  STG_LIMIT_COND_0_NONE = 0,                      // None
+  STG_LIMIT_COND_IS_PEAK = TRADE_COND_IS_PEAK,    // Market is at peak level
+  STG_LIMIT_COND_IS_PIVOT = TRADE_COND_IS_PIVOT,  // Market is in pivot levels
+  // STG_LIMIT_COND_ORDERS_PROFIT_GT_01PC = TRADE_COND_ORDERS_PROFIT_GT_01PC,  // Equity > 1%
+  // STG_LIMIT_COND_ORDERS_PROFIT_LT_01PC = TRADE_COND_ORDERS_PROFIT_LT_01PC,  // Equity < 1%
+  // STG_LIMIT_COND_ORDERS_PROFIT_GT_02PC = TRADE_COND_ORDERS_PROFIT_GT_02PC,  // Equity > 2%
+  // STG_LIMIT_COND_ORDERS_PROFIT_LT_02PC = TRADE_COND_ORDERS_PROFIT_LT_02PC,  // Equity < 2%
+  // STG_LIMIT_COND_ORDERS_PROFIT_GT_05PC = TRADE_COND_ORDERS_PROFIT_GT_05PC,  // Equity > 5%
+  // STG_LIMIT_COND_ORDERS_PROFIT_LT_05PC = TRADE_COND_ORDERS_PROFIT_LT_05PC,  // Equity < 5%
+  // STG_LIMIT_COND_ORDERS_PROFIT_GT_10PC = TRADE_COND_ORDERS_PROFIT_GT_10PC,  // Equity > 10%
+  // STG_LIMIT_COND_ORDERS_PROFIT_LT_10PC = TRADE_COND_ORDERS_PROFIT_LT_10PC,  // Equity < 10%
 };
 
 // User input params.
-INPUT2_GROUP("Meta Conditions strategy: main params");
-INPUT2 ENUM_STG_CONDITIONS_CONDITION Meta_Conditions_Condition1 = STG_CONDITIONS_COND_IS_PEAK;  // Trade condition 1
-INPUT2 ENUM_STRATEGY Meta_Conditions_Strategy1 = STRAT_AMA;  // Strategy 1 on condition 1
-INPUT2 ENUM_STG_CONDITIONS_CONDITION Meta_Conditions_Condition2 = STG_CONDITIONS_COND_IS_PIVOT;  // Trade condition 2
-INPUT2 ENUM_STRATEGY Meta_Conditions_Strategy2 = STRAT_MA_TREND;  // Strategy 2 on condition 2
-INPUT2 ENUM_STG_CONDITIONS_CONDITION Meta_Conditions_Condition3 = STG_CONDITIONS_COND_0_NONE;  // Trade condition 3
-INPUT2 ENUM_STRATEGY Meta_Conditions_Strategy3 = STRAT_NONE;  // Strategy 3 on condition 3
-INPUT2_GROUP("Meta Conditions strategy: common params");
-INPUT2 float Meta_Conditions_LotSize = 0;                // Lot size
-INPUT2 int Meta_Conditions_SignalOpenMethod = 0;         // Signal open method
-INPUT2 float Meta_Conditions_SignalOpenLevel = 0;        // Signal open level
-INPUT2 int Meta_Conditions_SignalOpenFilterMethod = 32;  // Signal open filter method
-INPUT2 int Meta_Conditions_SignalOpenFilterTime = 3;     // Signal open filter time (0-31)
-INPUT2 int Meta_Conditions_SignalOpenBoostMethod = 0;    // Signal open boost method
-INPUT2 int Meta_Conditions_SignalCloseMethod = 0;        // Signal close method
-INPUT2 int Meta_Conditions_SignalCloseFilter = 32;       // Signal close filter (-127-127)
-INPUT2 float Meta_Conditions_SignalCloseLevel = 0;       // Signal close level
-INPUT2 int Meta_Conditions_PriceStopMethod = 0;          // Price limit method
-INPUT2 float Meta_Conditions_PriceStopLevel = 2;         // Price limit level
-INPUT2 int Meta_Conditions_TickFilterMethod = 32;        // Tick filter method (0-255)
-INPUT2 float Meta_Conditions_MaxSpread = 4.0;            // Max spread to trade (in pips)
-INPUT2 short Meta_Conditions_Shift = 0;                  // Shift
-INPUT2 float Meta_Conditions_OrderCloseLoss = 200;       // Order close loss
-INPUT2 float Meta_Conditions_OrderCloseProfit = 200;     // Order close profit
-INPUT2 int Meta_Conditions_OrderCloseTime = 2880;        // Order close time in mins (>0) or bars (<0)
+INPUT2_GROUP("Meta Limit strategy: main params");
+INPUT2 ENUM_STG_LIMIT_CONDITION Meta_Limit_Condition1 = STG_LIMIT_COND_IS_PEAK;   // Trade condition 1
+INPUT2 ENUM_STRATEGY Meta_Limit_Strategy1 = STRAT_AMA;                            // Strategy 1 on condition 1
+INPUT2 ENUM_STG_LIMIT_CONDITION Meta_Limit_Condition2 = STG_LIMIT_COND_IS_PIVOT;  // Trade condition 2
+INPUT2 ENUM_STRATEGY Meta_Limit_Strategy2 = STRAT_MA_TREND;                       // Strategy 2 on condition 2
+INPUT2 ENUM_STG_LIMIT_CONDITION Meta_Limit_Condition3 = STG_LIMIT_COND_0_NONE;    // Trade condition 3
+INPUT2 ENUM_STRATEGY Meta_Limit_Strategy3 = STRAT_NONE;                           // Strategy 3 on condition 3
+INPUT2_GROUP("Meta Limit strategy: common params");
+INPUT2 float Meta_Limit_LotSize = 0;                // Lot size
+INPUT2 int Meta_Limit_SignalOpenMethod = 0;         // Signal open method
+INPUT2 float Meta_Limit_SignalOpenLevel = 0;        // Signal open level
+INPUT2 int Meta_Limit_SignalOpenFilterMethod = 32;  // Signal open filter method
+INPUT2 int Meta_Limit_SignalOpenFilterTime = 3;     // Signal open filter time (0-31)
+INPUT2 int Meta_Limit_SignalOpenBoostMethod = 0;    // Signal open boost method
+INPUT2 int Meta_Limit_SignalCloseMethod = 0;        // Signal close method
+INPUT2 int Meta_Limit_SignalCloseFilter = 32;       // Signal close filter (-127-127)
+INPUT2 float Meta_Limit_SignalCloseLevel = 0;       // Signal close level
+INPUT2 int Meta_Limit_PriceStopMethod = 0;          // Price limit method
+INPUT2 float Meta_Limit_PriceStopLevel = 2;         // Price limit level
+INPUT2 int Meta_Limit_TickFilterMethod = 32;        // Tick filter method (0-255)
+INPUT2 float Meta_Limit_MaxSpread = 4.0;            // Max spread to trade (in pips)
+INPUT2 short Meta_Limit_Shift = 0;                  // Shift
+INPUT2 float Meta_Limit_OrderCloseLoss = 200;       // Order close loss
+INPUT2 float Meta_Limit_OrderCloseProfit = 200;     // Order close profit
+INPUT2 int Meta_Limit_OrderCloseTime = 2880;        // Order close time in mins (>0) or bars (<0)
 
 // Structs.
 // Defines struct with default user strategy values.
-struct Stg_Meta_Conditions_Params_Defaults : StgParams {
-  Stg_Meta_Conditions_Params_Defaults()
-      : StgParams(::Meta_Conditions_SignalOpenMethod, ::Meta_Conditions_SignalOpenFilterMethod,
-                  ::Meta_Conditions_SignalOpenLevel, ::Meta_Conditions_SignalOpenBoostMethod,
-                  ::Meta_Conditions_SignalCloseMethod, ::Meta_Conditions_SignalCloseFilter,
-                  ::Meta_Conditions_SignalCloseLevel, ::Meta_Conditions_PriceStopMethod,
-                  ::Meta_Conditions_PriceStopLevel, ::Meta_Conditions_TickFilterMethod, ::Meta_Conditions_MaxSpread,
-                  ::Meta_Conditions_Shift) {
-    Set(STRAT_PARAM_LS, ::Meta_Conditions_LotSize);
-    Set(STRAT_PARAM_OCL, ::Meta_Conditions_OrderCloseLoss);
-    Set(STRAT_PARAM_OCP, ::Meta_Conditions_OrderCloseProfit);
-    Set(STRAT_PARAM_OCT, ::Meta_Conditions_OrderCloseTime);
-    Set(STRAT_PARAM_SOFT, ::Meta_Conditions_SignalOpenFilterTime);
+struct Stg_Meta_Limit_Params_Defaults : StgParams {
+  Stg_Meta_Limit_Params_Defaults()
+      : StgParams(::Meta_Limit_SignalOpenMethod, ::Meta_Limit_SignalOpenFilterMethod, ::Meta_Limit_SignalOpenLevel,
+                  ::Meta_Limit_SignalOpenBoostMethod, ::Meta_Limit_SignalCloseMethod, ::Meta_Limit_SignalCloseFilter,
+                  ::Meta_Limit_SignalCloseLevel, ::Meta_Limit_PriceStopMethod, ::Meta_Limit_PriceStopLevel,
+                  ::Meta_Limit_TickFilterMethod, ::Meta_Limit_MaxSpread, ::Meta_Limit_Shift) {
+    Set(STRAT_PARAM_LS, ::Meta_Limit_LotSize);
+    Set(STRAT_PARAM_OCL, ::Meta_Limit_OrderCloseLoss);
+    Set(STRAT_PARAM_OCP, ::Meta_Limit_OrderCloseProfit);
+    Set(STRAT_PARAM_OCT, ::Meta_Limit_OrderCloseTime);
+    Set(STRAT_PARAM_SOFT, ::Meta_Limit_SignalOpenFilterTime);
   }
 };
 
-class Stg_Meta_Conditions : public Strategy {
+class Stg_Meta_Limit : public Strategy {
  protected:
   DictStruct<long, Ref<Strategy>> strats;
   Trade strade;  // Trade instance.
 
  public:
-  Stg_Meta_Conditions(StgParams &_sparams, TradeParams &_tparams, ChartParams &_cparams, string _name = "")
+  Stg_Meta_Limit(StgParams &_sparams, TradeParams &_tparams, ChartParams &_cparams, string _name = "")
       : Strategy(_sparams, _tparams, _cparams, _name), strade(_tparams, _cparams) {}
 
-  static Stg_Meta_Conditions *Init(ENUM_TIMEFRAMES _tf = NULL, EA *_ea = NULL) {
+  static Stg_Meta_Limit *Init(ENUM_TIMEFRAMES _tf = NULL, EA *_ea = NULL) {
     // Initialize strategy initial values.
-    Stg_Meta_Conditions_Params_Defaults stg_conditions_defaults;
-    StgParams _stg_params(stg_conditions_defaults);
+    Stg_Meta_Limit_Params_Defaults stg_meta_limit_defaults;
+    StgParams _stg_params(stg_meta_limit_defaults);
     // Initialize Strategy instance.
     ChartParams _cparams(_tf, _Symbol);
     TradeParams _tparams;
-    Strategy *_strat = new Stg_Meta_Conditions(_stg_params, _tparams, _cparams, "(Meta) Conditions");
+    Strategy *_strat = new Stg_Meta_Limit(_stg_params, _tparams, _cparams, "(Meta) Limit");
     return _strat;
   }
 
@@ -91,9 +89,9 @@ class Stg_Meta_Conditions : public Strategy {
    * Event on strategy's init.
    */
   void OnInit() {
-    StrategyAdd(Meta_Conditions_Strategy1, 1);
-    StrategyAdd(Meta_Conditions_Strategy2, 2);
-    StrategyAdd(Meta_Conditions_Strategy3, 3);
+    StrategyAdd(Meta_Limit_Strategy1, 1);
+    StrategyAdd(Meta_Limit_Strategy2, 2);
+    StrategyAdd(Meta_Limit_Strategy3, 3);
   }
 
   /**
@@ -308,8 +306,8 @@ class Stg_Meta_Conditions : public Strategy {
     // uint _ishift = _indi.GetShift();
     uint _ishift = _shift;
     Ref<Strategy> _strat_ref;
-    if (!_result && Meta_Conditions_Condition1 != STG_CONDITIONS_COND_0_NONE &&
-        strade.CheckCondition((ENUM_TRADE_CONDITION)Meta_Conditions_Condition1)) {
+    if (!_result && Meta_Limit_Condition1 != STG_LIMIT_COND_0_NONE &&
+        strade.CheckCondition((ENUM_TRADE_CONDITION)Meta_Limit_Condition1)) {
       _strat_ref = strats.GetByKey(1);
       if (_strat_ref.IsSet()) {
         _level = _level == 0.0f ? _strat_ref.Ptr().Get<float>(STRAT_PARAM_SOL) : _level;
@@ -318,8 +316,8 @@ class Stg_Meta_Conditions : public Strategy {
         _result |= _strat_ref.Ptr().SignalOpen(_cmd, _method, _level, _shift);
       }
     }
-    if (!_result && Meta_Conditions_Condition2 != STG_CONDITIONS_COND_0_NONE &&
-        strade.CheckCondition((ENUM_TRADE_CONDITION)Meta_Conditions_Condition2)) {
+    if (!_result && Meta_Limit_Condition2 != STG_LIMIT_COND_0_NONE &&
+        strade.CheckCondition((ENUM_TRADE_CONDITION)Meta_Limit_Condition2)) {
       _strat_ref = strats.GetByKey(2);
       if (_strat_ref.IsSet()) {
         _level = _level == 0.0f ? _strat_ref.Ptr().Get<float>(STRAT_PARAM_SOL) : _level;
@@ -328,8 +326,8 @@ class Stg_Meta_Conditions : public Strategy {
         _result |= _strat_ref.Ptr().SignalOpen(_cmd, _method, _level, _shift);
       }
     }
-    if (!_result && Meta_Conditions_Condition3 != STG_CONDITIONS_COND_0_NONE &&
-        strade.CheckCondition((ENUM_TRADE_CONDITION)Meta_Conditions_Condition3)) {
+    if (!_result && Meta_Limit_Condition3 != STG_LIMIT_COND_0_NONE &&
+        strade.CheckCondition((ENUM_TRADE_CONDITION)Meta_Limit_Condition3)) {
       _strat_ref = strats.GetByKey(3);
       if (_strat_ref.IsSet()) {
         _level = _level == 0.0f ? _strat_ref.Ptr().Get<float>(STRAT_PARAM_SOL) : _level;
@@ -355,4 +353,4 @@ class Stg_Meta_Conditions : public Strategy {
   }
 };
 
-#endif  // STG_META_CONDITIONS_MQH
+#endif  // STG_META_LIMIT_MQH
