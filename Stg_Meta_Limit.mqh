@@ -20,24 +20,24 @@ INPUT2 uint Meta_Limit_Max_Trades_Per_Day = 30;  // Maximum active trades per da
 // INPUT2 float Meta_Limit_Max_Lots_Per_Day = 1.0f;   // Maximum lots to trade per day
 // INPUT2 ENUM_STG_LIMIT_CONDITION Meta_Limit_Condition1 = STG_LIMIT_COND_IS_PEAK;   // Limit condition 1
 INPUT2 ENUM_STRATEGY Meta_Limit_Strategy_Main = STRAT_MA_TREND;  // Strategy
-INPUT2_GROUP("Meta Limit strategy: common params");
-INPUT2 float Meta_Limit_LotSize = 0;                // Lot size
-INPUT2 int Meta_Limit_SignalOpenMethod = 0;         // Signal open method
-INPUT2 float Meta_Limit_SignalOpenLevel = 0;        // Signal open level
-INPUT2 int Meta_Limit_SignalOpenFilterMethod = 32;  // Signal open filter method
-INPUT2 int Meta_Limit_SignalOpenFilterTime = 3;     // Signal open filter time (0-31)
-INPUT2 int Meta_Limit_SignalOpenBoostMethod = 0;    // Signal open boost method
-INPUT2 int Meta_Limit_SignalCloseMethod = 0;        // Signal close method
-INPUT2 int Meta_Limit_SignalCloseFilter = 32;       // Signal close filter (-127-127)
-INPUT2 float Meta_Limit_SignalCloseLevel = 0;       // Signal close level
-INPUT2 int Meta_Limit_PriceStopMethod = 1;          // Price limit method
-INPUT2 float Meta_Limit_PriceStopLevel = 2;         // Price limit level
-INPUT2 int Meta_Limit_TickFilterMethod = 32;        // Tick filter method (0-255)
-INPUT2 float Meta_Limit_MaxSpread = 4.0;            // Max spread to trade (in pips)
-INPUT2 short Meta_Limit_Shift = 0;                  // Shift
-INPUT2 float Meta_Limit_OrderCloseLoss = 200;       // Order close loss
-INPUT2 float Meta_Limit_OrderCloseProfit = 200;     // Order close profit
-INPUT2 int Meta_Limit_OrderCloseTime = 2880;        // Order close time in mins (>0) or bars (<0)
+INPUT3_GROUP("Meta Limit strategy: common params");
+INPUT3 float Meta_Limit_LotSize = 0;                // Lot size
+INPUT3 int Meta_Limit_SignalOpenMethod = 0;         // Signal open method
+INPUT3 float Meta_Limit_SignalOpenLevel = 0;        // Signal open level
+INPUT3 int Meta_Limit_SignalOpenFilterMethod = 32;  // Signal open filter method
+INPUT3 int Meta_Limit_SignalOpenFilterTime = 3;     // Signal open filter time (0-31)
+INPUT3 int Meta_Limit_SignalOpenBoostMethod = 0;    // Signal open boost method
+INPUT3 int Meta_Limit_SignalCloseMethod = 0;        // Signal close method
+INPUT3 int Meta_Limit_SignalCloseFilter = 32;       // Signal close filter (-127-127)
+INPUT3 float Meta_Limit_SignalCloseLevel = 0;       // Signal close level
+INPUT3 int Meta_Limit_PriceStopMethod = 1;          // Price limit method
+INPUT3 float Meta_Limit_PriceStopLevel = 2;         // Price limit level
+INPUT3 int Meta_Limit_TickFilterMethod = 32;        // Tick filter method (0-255)
+INPUT3 float Meta_Limit_MaxSpread = 4.0;            // Max spread to trade (in pips)
+INPUT3 short Meta_Limit_Shift = 0;                  // Shift
+INPUT3 float Meta_Limit_OrderCloseLoss = 200;       // Order close loss
+INPUT3 float Meta_Limit_OrderCloseProfit = 200;     // Order close profit
+INPUT3 int Meta_Limit_OrderCloseTime = 2880;        // Order close time in mins (>0) or bars (<0)
 
 // Structs.
 // Defines struct with default user strategy values.
