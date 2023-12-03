@@ -19,7 +19,7 @@ INPUT2_GROUP("Meta Limit strategy: main params");
 INPUT2 uint Meta_Limit_Max_Trades_Per_Day = 30;  // Maximum active trades per day (0=off)
 // INPUT2 float Meta_Limit_Max_Lots_Per_Day = 1.0f;   // Maximum lots to trade per day
 // INPUT2 ENUM_STG_LIMIT_CONDITION Meta_Limit_Condition1 = STG_LIMIT_COND_IS_PEAK;   // Limit condition 1
-INPUT2 ENUM_STRATEGY Meta_Limit_Strategy_Main = STRAT_MA_TREND;  // Strategy
+INPUT2 ENUM_STRATEGY Meta_Limit_Strategy_Main = STRAT_MA_BREAKOUT;  // Strategy
 INPUT3_GROUP("Meta Limit strategy: common params");
 INPUT3 float Meta_Limit_LotSize = 0;                // Lot size
 INPUT3 int Meta_Limit_SignalOpenMethod = 0;         // Signal open method
